@@ -14,27 +14,40 @@ print(f"Snake size aka divded space {snake_size[0], snake_size[1]}")
 snake = Snake((0,255,255),pygame.Rect((0, 0, snake_size[0], snake_size[1])))
 
 board = Board(7, 10)
-
+clock = pygame.time.Clock()
 run = True
 while run:
+  dt = clock.tick(60)/1000
   screen.fill((0,0,0))
   board.initBoard(SCREEN_WIDTH, SCREEN_HEIGHT, screen)
   pygame.draw.rect(screen, snake.color, snake.appearance)
   key = pygame.key.get_pressed()
-  if key[pygame.K_a] or key[pygame.K_LEFT]:
-    snake.appearance.move_ip(-snake.speed * snake_size[1], 0)
-    print(f"moved:{-snake.speed * snake_size[1]} ")
-  elif key[pygame.K_d] or key[pygame.K_RIGHT]:
-    snake.appearance.move_ip(snake.speed * snake_size[1],0)
-  elif key[pygame.K_w] or key[pygame.K_UP]:
-    snake.appearance.move_ip(0,-snake.speed * snake_size[0])
-  elif key[pygame.K_s] or key[pygame.K_DOWN]:
-    snake.appearance.move_ip(0,snake.speed * snake_size[0])
-  elif key[pygame.K_ESCAPE]:
-    run = False
+  # if key.__contains__(True):
+  #   print(key)
+  #   snake.updateDirection(key)
   for event in pygame.event.get():
     if(event.type == pygame.QUIT):
       run = False
-  pygame.time.delay(10)
+    elif event.type == pygame.KEYDOWN:
+      print(event.key)
+      snake.updateDirection(event.key)
+  if key[pygame.K_ESCAPE]:
+    run = False
+  match(snake.direction):
+    case 'l':
+      
+      snake.appearance.move_ip(-snake_size[0], 0)
+      # pygame.time.delay(150)
+    case 'r':
+      snake.appearance.move_ip(snake_size[0],0)
+      # pygame.time.delay(150)
+    case 'u':
+      snake.appearance.move_ip(0, -snake_size[1])
+      # pygame.time.delay(150)
+    case 'd':
+      snake.appearance.move_ip(0, snake_size[1])
+      # pygame.time.delay(150)
+    case _:
+      pass
   pygame.display.update()
 pygame.quit()

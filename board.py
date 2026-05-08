@@ -24,6 +24,8 @@ class Board():
           color = (0,255,0)
         else:
           color = (0,102,0)
+        # print(screenLength/self.length)
+        # print(f"Drawing at {screenLength/self.length * i, screenWidth/self.width * j}")
         pygame.draw.rect(screen,color,pygame.Rect(screenLength/self.length * i, screenWidth/self.width * j, screenLength/self.length, screenWidth/self.width))
 
 
