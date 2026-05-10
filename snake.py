@@ -31,5 +31,6 @@ class Snake:
         self.direction = 'r'
   def updateLength(self):
     self.length+=1
-
+  def getPosition(self):
+    return (self.appearance.x, self.appearance.y)
 
