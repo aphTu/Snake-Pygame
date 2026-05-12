@@ -38,13 +38,17 @@ class Board():
     # print(f"actual_x +0.3: {(actual_x+0.3).is_integer()}")
     # print(f"actual_y -0.3: {(actual_y-0.3).is_integer()}")
     # print(f"actual_y +0.3: {(actual_y+0.3).is_integer()}")
-    upper_x = math.ceil(actual_x) - 0.4
-    lower_x = math.floor(actual_x) + 0.4
-    upper_y = math.ceil(actual_y) -0.4
-    lower_y = math.floor(actual_y) + 0.4
-    print(upper_x, lower_x, upper_y, lower_y)
-    if (actual_x <= upper_x and actual_x >= lower_x) and (lower_y <= actual_y <= upper_y):
-      return True
+    # upper_x = math.ceil(actual_x) - 0.49
+    # lower_x = math.floor(actual_x) + 0.49
+    # upper_y = math.ceil(actual_y) + 0.5
+    # lower_y = math.floor(actual_y) - 0.5
+    # print(upper_x, lower_x, upper_y, lower_y)
+    # print(f"x: {lower_x <= actual_x <= upper_x}")
+    # print(f"y: {lower_y <= actual_y and actual_y <= upper_y}")
+    # print(upper_y)
+    # print(actual_y >= upper_y)
+    # if (actual_x <= upper_x and actual_x >= lower_x) and (lower_y <= actual_y <= upper_y):
+    return True
     return False
 
 
