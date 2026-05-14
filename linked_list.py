@@ -119,6 +119,23 @@ class linkedList():
 
     return val
 
+
+  def removeAtTail(self):
+    if self.len==0 or self.headNode is None:
+      raise IndexError("Cannot delete items from an empty linked list")
+    
+    remove_node = self.tailNode
+    val = remove_node.val
+    self.tailNode = remove_node.prev
+
+    if self.tailNode is None:
+      self.headNode = None
+    else:
+      self.tailNode.next = None
+    self.len -=1
+    return val
+  
+  
   def printLinkedList(self):
     curr_ptr = self.headNode
     while curr_ptr is not None:
@@ -139,4 +156,5 @@ class linkedList():
       _str+= f"{curr_ptr.val} "
       curr_ptr = curr_ptr.prev
     return _str
-  
+  def getLen(self):
+    return self.len

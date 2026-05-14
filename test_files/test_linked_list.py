@@ -296,3 +296,86 @@ class TestLinkedList(unittest.TestCase):
       self.assertEqual(expected, list.returnLinkedList())
       self.assertEqual(0, list.len)
       self.assertEqual(expected_reverse, list.returnLinkedListReverse())
+    
+  def test_remove_at_tail(self):
+    val = 1
+    val2 = 2
+    val3 = 3
+    val4 = 4
+    val5 = 99
+
+    expected = f"{val} {val2} {val5} {val3} "
+    expected_reverse = f"{val3} {val5} {val2} {val} "
+    expected_item = val4
+    list = linkedList()
+    list.insertHead(val)
+    list.insertTail(val2)
+    list.insertTail(val3)
+    list.insertTail(val4)
+    list.insertAtIndex(val5, 1)
+    item = list.removeAtTail()
+    self.assertEqual(expected, list.returnLinkedList())
+    self.assertEqual(4, list.getLen())
+    self.assertEqual(expected_reverse, list.returnLinkedListReverse())
+    self.assertEqual(expected_item, item)
+
+  def test_remove_two_at_tail(self):
+    val = 1
+    val2 = 2
+    val3 = 3
+    val4 = 4
+    val5 = 99
+
+    expected = f"{val} {val2} {val5} "
+    expected_reverse = f"{val5} {val2} {val} "
+    expected_item = val4
+    expected_secondItem = val3
+    list = linkedList()
+    list.insertHead(val)
+    list.insertTail(val2)
+    list.insertTail(val3)
+    list.insertTail(val4)
+    list.insertAtIndex(val5, 1)
+    item = list.removeAtTail()
+    secondItem = list.removeAtTail()
+    self.assertEqual(expected, list.returnLinkedList())
+    self.assertEqual(3, list.getLen())
+    self.assertEqual(expected_reverse, list.returnLinkedListReverse())
+    self.assertEqual(expected_item, item)
+    self.assertEqual(expected_secondItem, secondItem)
+
+  def test_remove_single_node_tail(self):
+    val = 5
+    expected = ""
+    expected_reverse = ""
+    expected_item = val
+
+    list = linkedList()
+    list.insertHead(val)
+    item = list.removeAtTail()
+
+    self.assertEqual(expected, list.returnLinkedList())
+    self.assertEqual(0, list.len)
+    self.assertEqual(expected_reverse, list.returnLinkedListReverse())
+    self.assertEqual(item, expected_item)
+
+  def test_remove_tail_until_empty(self):
+    val = 5
+    val2 = 10
+    val3 = 20
+
+    expected = ""
+    expected_reverse = ""
+
+    list = linkedList()
+    list.insertHead(val)
+    list.insertTail(val2)
+    list.insertTail(val3)
+
+    list.removeAtTail()
+    list.removeAtTail()
+    list.removeAtTail()
+
+    self.assertEqual(expected, list.returnLinkedList())
+    self.assertEqual(0, list.len)
+    self.assertEqual(expected_reverse, list.returnLinkedListReverse())    
