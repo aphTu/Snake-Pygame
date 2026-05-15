@@ -138,14 +138,28 @@ class linkedList():
   def removeAtIndex(self, index):
     if self.len == 0 or self.headNode is None or self.tailNode is None:
       return IndexError("Cannot delete items from an empty linked list")
-    curr_ptr = self.headNode
-    i = 0
-    while(curr_ptr is not None or i!= index):
-      curr_ptr= curr_ptr.next
-      i+=1
-
-    
-
+    if self.len <= index or index < 0:
+      return IndexError("Cannot delete an out of bound item")
+    if index == 0:
+      return self.removeAtHead()
+    else :
+      i = 0
+      curr_ptr = self.headNode
+      while(curr_ptr is not None and i!= index):
+        curr_ptr= curr_ptr.next
+        i+=1
+      # currently at that index or at tail
+      if curr_ptr is None or i+1 == self.len:
+        return self.removeAtTail()
+      else:
+        remove_node = curr_ptr
+        next_node = remove_node.next
+        prev_node = remove_node.prev
+        next_node.prev = prev_node
+        prev_node.next = next_node
+        val = remove_node.val
+        self.len-=1
+        return val
 
   def printLinkedList(self):
     curr_ptr = self.headNode

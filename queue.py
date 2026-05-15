@@ -1,4 +1,6 @@
 
 class Queue():
   def __init__(self):
-    pass
+    self.head = None
+    self.tail = None
+    self.len = 0

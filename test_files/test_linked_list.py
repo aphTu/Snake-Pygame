@@ -379,3 +379,256 @@ class TestLinkedList(unittest.TestCase):
     self.assertEqual(expected, list.returnLinkedList())
     self.assertEqual(0, list.len)
     self.assertEqual(expected_reverse, list.returnLinkedListReverse())    
+
+  def test_remove_at_index_in_middle(self):
+    val = 5
+    val2 = 10
+    val3 = 20
+
+    expected = f"{val} {val3} "
+    expected_reverse = f"{val3} {val} "
+    expected_item = val2
+    list = linkedList()
+    list.insertHead(val)
+    list.insertTail(val2)
+    list.insertTail(val3)
+    item = list.removeAtIndex(1)
+
+    self.assertEqual(expected, list.returnLinkedList())
+    self.assertEqual(2, list.getLen())
+    self.assertEqual(expected_reverse, list.returnLinkedListReverse())
+    self.assertEqual(expected_item, item)
+
+  def test_remove_at_index_head(self):
+    val = 5
+    val2 = 10
+    val3 = 20
+
+    expected = f"{val2} {val3} "
+    expected_reverse = f"{val3} {val2} "
+    expected_item = val
+    list = linkedList()
+    list.insertHead(val)
+    list.insertTail(val2)
+    list.insertTail(val3)
+    item = list.removeAtIndex(0)
+
+    self.assertEqual(expected, list.returnLinkedList())
+    self.assertEqual(2, list.getLen())
+    self.assertEqual(expected_reverse, list.returnLinkedListReverse())
+    self.assertEqual(expected_item, item)
+
+  def test_remove_at_index_tail(self):
+    val = 5
+    val2 = 10
+    val3 = 20
+
+    expected = f"{val} {val2} "
+    expected_reverse = f"{val2} {val} "
+    expected_item = val3
+    list = linkedList()
+    list.insertHead(val)
+    list.insertTail(val2)
+    list.insertTail(val3)
+    item = list.removeAtIndex(2)
+
+    self.assertEqual(expected, list.returnLinkedList())
+    self.assertEqual(2, list.getLen())
+    self.assertEqual(expected_reverse, list.returnLinkedListReverse())
+    self.assertEqual(expected_item, item)
+  
+  def test_remove_at_index_single_item(self):
+    val = 5
+
+    expected = ""
+    expected_reverse = ""
+    expected_item = val
+
+    list = linkedList()
+    list.insertHead(val)
+
+    removed_item = list.removeAtIndex(0)
+
+    self.assertEqual(expected, list.returnLinkedList())
+    self.assertEqual(0, list.getLen())
+    self.assertEqual(expected_reverse, list.returnLinkedListReverse())
+    self.assertEqual(expected_item, removed_item)
+
+  def test_remove_at_index_two_items_remove_head(self):
+    val = 5
+    val2 = 10
+
+    expected = f"{val2} "
+    expected_reverse = f"{val2} "
+    expected_item = val
+
+    list = linkedList()
+    list.insertHead(val)
+    list.insertTail(val2)
+
+    removed_item = list.removeAtIndex(0)
+
+    self.assertEqual(expected, list.returnLinkedList())
+    self.assertEqual(1, list.getLen())
+    self.assertEqual(expected_reverse, list.returnLinkedListReverse())
+    self.assertEqual(expected_item, removed_item)
+
+  def test_remove_at_index_two_items_remove_tail(self):
+    val = 5
+    val2 = 10
+
+    expected = f"{val} "
+    expected_reverse = f"{val} "
+    expected_item = val2
+
+    list = linkedList()
+    list.insertHead(val)
+    list.insertTail(val2)
+
+    removed_item = list.removeAtIndex(1)
+
+    self.assertEqual(expected, list.returnLinkedList())
+    self.assertEqual(1, list.getLen())
+    self.assertEqual(expected_reverse, list.returnLinkedListReverse())
+    self.assertEqual(expected_item, removed_item)
+
+  def test_remove_at_index_second_item(self):
+    val = 5
+    val2 = 10
+    val3 = 20
+    val4 = 30
+
+    expected = f"{val} {val3} {val4} "
+    expected_reverse = f"{val4} {val3} {val} "
+    expected_item = val2
+
+    list = linkedList()
+    list.insertHead(val)
+    list.insertTail(val2)
+    list.insertTail(val3)
+    list.insertTail(val4)
+
+    removed_item = list.removeAtIndex(1)
+
+    self.assertEqual(expected, list.returnLinkedList())
+    self.assertEqual(3, list.getLen())
+    self.assertEqual(expected_reverse, list.returnLinkedListReverse())
+    self.assertEqual(expected_item, removed_item)
+
+  def test_remove_at_index_second_to_last_item(self):
+    val = 5
+    val2 = 10
+    val3 = 20
+    val4 = 30
+
+    expected = f"{val} {val2} {val4} "
+    expected_reverse = f"{val4} {val2} {val} "
+    expected_item = val3
+
+    list = linkedList()
+    list.insertHead(val)
+    list.insertTail(val2)
+    list.insertTail(val3)
+    list.insertTail(val4)
+
+    removed_item = list.removeAtIndex(2)
+
+    self.assertEqual(expected, list.returnLinkedList())
+    self.assertEqual(3, list.getLen())
+    self.assertEqual(expected_reverse, list.returnLinkedListReverse())
+    self.assertEqual(expected_item, removed_item)
+
+  def test_remove_at_index_multiple_removals(self):
+    val = 5
+    val2 = 10
+    val3 = 20
+    val4 = 30
+
+    expected = f"{val} {val4} "
+    expected_reverse = f"{val4} {val} "
+
+    list = linkedList()
+    list.insertHead(val)
+    list.insertTail(val2)
+    list.insertTail(val3)
+    list.insertTail(val4)
+
+    removed_item1 = list.removeAtIndex(1)
+    removed_item2 = list.removeAtIndex(1)
+
+    self.assertEqual(expected, list.returnLinkedList())
+    self.assertEqual(2, list.getLen())
+    self.assertEqual(expected_reverse, list.returnLinkedListReverse())
+    self.assertEqual(val2, removed_item1)
+    self.assertEqual(val3, removed_item2)
+
+  def test_remove_at_index_after_insert_at_index(self):
+    val = 5
+    val2 = 10
+    val3 = 20
+    val4 = 30
+
+    expected = f"{val} {val2} {val3} "
+    expected_reverse = f"{val3} {val2} {val} "
+    expected_item = val4
+
+    list = linkedList()
+    list.insertHead(val)
+    list.insertTail(val2)
+    list.insertTail(val4)
+    list.insertAtIndex(val3, 2)
+    removed_item = list.removeAtIndex(2)
+
+    self.assertEqual(expected, list.returnLinkedList())
+    self.assertEqual(3, list.getLen())
+    self.assertEqual(expected_reverse, list.returnLinkedListReverse())
+    self.assertEqual(expected_item, removed_item)
+
+  def test_remove_at_index_empty_list(self):
+    expected = ""
+    expected_reverse = ""
+
+    list = linkedList()
+
+    result = list.removeAtIndex(0)
+
+    self.assertEqual(expected, list.returnLinkedList())
+    self.assertEqual(0, list.getLen())
+    self.assertEqual(expected_reverse, list.returnLinkedListReverse())
+    self.assertTrue(isinstance(result, Exception))
+
+  def test_remove_at_index_negative_index(self):
+    val = 5
+    val2 = 10
+
+    expected = f"{val} {val2} "
+    expected_reverse = f"{val2} {val} "
+
+    list = linkedList()
+    list.insertHead(val)
+    list.insertTail(val2)
+
+    result = list.removeAtIndex(-1)
+
+    self.assertEqual(expected, list.returnLinkedList())
+    self.assertEqual(2, list.getLen())
+    self.assertEqual(expected_reverse, list.returnLinkedListReverse())
+    self.assertTrue(isinstance(result, Exception))
+
+  def test_remove_at_index_out_of_bounds(self):
+    val = 5
+    val2 = 10
+
+    expected = f"{val} {val2} "
+    expected_reverse = f"{val2} {val} "
+
+    list = linkedList()
+    list.insertHead(val)
+    list.insertTail(val2)
+
+    result = list.removeAtIndex(2)
+
+    self.assertEqual(expected, list.returnLinkedList())
+    self.assertEqual(2, list.getLen())
+    self.assertEqual(expected_reverse, list.returnLinkedListReverse())
+    self.assertTrue(isinstance(result, Exception))
