@@ -45,7 +45,7 @@ class Node():
       _str+=f", {self.next.val}"
     return _str
 
-class linkedList():
+class LinkedList():
   def __init__(self):
     self.headNode = None
     self.tailNode = None
@@ -160,13 +160,16 @@ class linkedList():
         val = remove_node.val
         self.len-=1
         return val
-
+  def isEmpty(self):
+    return self.getLen() == 0
+  
   def printLinkedList(self):
     curr_ptr = self.headNode
     while curr_ptr is not None:
       print(curr_ptr.val, sep=" ")
       curr_ptr = curr_ptr.next
     print("")
+
   def returnLinkedList(self):
     _str= ""
     curr_ptr = self.headNode
@@ -174,6 +177,7 @@ class linkedList():
       _str+= f"{curr_ptr.val} "
       curr_ptr = curr_ptr.next
     return _str
+  
   def returnLinkedListReverse(self):
     _str = ""
     curr_ptr = self.tailNode
@@ -181,5 +185,6 @@ class linkedList():
       _str+= f"{curr_ptr.val} "
       curr_ptr = curr_ptr.prev
     return _str
+  
   def getLen(self):
     return self.len

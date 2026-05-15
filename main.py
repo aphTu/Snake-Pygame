@@ -2,6 +2,8 @@ import pygame
 from pygame._sdl2.video import Window
 from snake import Snake
 from board import Board
+from queue import Queue
+import math
 pygame.init()
 screen = pygame.display.set_mode((0,0), pygame.RESIZABLE)
 window = Window.from_display_module()
@@ -17,6 +19,8 @@ board = Board(7, 10)
 clock = pygame.time.Clock()
 run = True
 allow_input = True
+input_queue = Queue()
+current_input = None
 while run:
   dt = clock.tick(60)/1000
   screen.fill((0,0,0))
@@ -31,29 +35,27 @@ while run:
       run = False
     elif event.type == pygame.KEYDOWN:
       if allow_input:
-        snake.updateDirection(event.key)
+        input_queue.enqueue(event.key)
+        
         allow_input = False
   if key[pygame.K_ESCAPE]:
     run = False
   curr_pos = snake.getPosition()
-  # print(f"{curr_pos[1]/(SCREEN_WIDTH/7)} and {curr_pos[0]/(SCREEN_LENGTH/10)}")
   if(board.validPosition(curr_pos[0],curr_pos[1], SCREEN_LENGTH, SCREEN_WIDTH)):
-    # print(f"gotta be true right, {curr_pos[0], curr_pos[1]}")
-    allow_input = True
+    print("what?")
+    if not input_queue.isEmpty():
+      print(input_queue)
+      snake.updateDirection(input_queue.dequeue())   
+      print(snake.direction) 
   match(snake.direction):
     case 'l':
-      # print(curr_pos)
       snake.appearance.move_ip(-snake_size[0] * 4 * dt , 0)
     case 'r':
-      # print(curr_pos)
-
-      snake.appearance.move_ip(snake_size[0] * dt * 4 ,0)
+      snake.appearance.move_ip(math.floor(snake_size[0] * dt * 4),0)
     case 'u':
-      # print(curr_pos)
       
       snake.appearance.move_ip(0, -snake_size[1] * dt * 4)
     case 'd':
-      # print(curr_pos)
       
       snake.appearance.move_ip(0, snake_size[1] * dt * 4)
     case _:

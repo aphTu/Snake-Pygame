@@ -7,7 +7,7 @@ class TestLinkedList(unittest.TestCase):
   def test_insert_head(self):
     val  = 5
     expected = f"{val} "
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     self.assertEqual(expected, list.returnLinkedList())
     self.assertEqual(1, list.len)
@@ -19,7 +19,7 @@ class TestLinkedList(unittest.TestCase):
     val3 = 20
     expected = f"{val3} {val2} {val} "
     expected_reverse = f"{val} {val2} {val3} "
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertHead(val2)
     list.insertHead(val3)
@@ -32,7 +32,7 @@ class TestLinkedList(unittest.TestCase):
   def test_insert_tail(self):
     val  = 5
     expected = f"{val} "
-    list = linkedList()
+    list = LinkedList()
     list.insertTail(val)
     self.assertEqual(expected, list.returnLinkedList())
     self.assertEqual(1, list.len)
@@ -47,7 +47,7 @@ class TestLinkedList(unittest.TestCase):
     expected = f"{val} {val2} {val3} "
     expected_reverse = f"{val3} {val2} {val} "
 
-    list = linkedList()
+    list = LinkedList()
     list.insertTail(val)
     list.insertTail(val2)
     list.insertTail(val3)
@@ -59,7 +59,7 @@ class TestLinkedList(unittest.TestCase):
   def test_insert_at_zero_index(self):
     val  = 5
     expected = f"{val} "
-    list = linkedList()
+    list = LinkedList()
     list.insertAtIndex(val, 0)
     self.assertEqual(expected, list.returnLinkedList())
     self.assertEqual(1, list.len)
@@ -73,7 +73,7 @@ class TestLinkedList(unittest.TestCase):
     expected = f"{val} {val3} {val2} "
     expected_reverse = f"{val2} {val3} {val} "
 
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertTail(val2)
     list.insertAtIndex(val3, 0)
@@ -89,7 +89,7 @@ class TestLinkedList(unittest.TestCase):
     expected = f"{val} {val2} "
     expected_reverse = f"{val2} {val} "
 
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertAtIndex(val2, 0)
 
@@ -107,7 +107,7 @@ class TestLinkedList(unittest.TestCase):
     expected = f"{val} {val2} {val4} {val3} "
     expected_reverse = f"{val3} {val4} {val2} {val} "
 
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertTail(val2)
     list.insertTail(val3)
@@ -126,7 +126,7 @@ class TestLinkedList(unittest.TestCase):
     expected = f"{val} {val2} {val3} "
     expected_reverse = f"{val3} {val2} {val} "
 
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertTail(val2)
     list.insertAtIndex(val3, 1)
@@ -145,7 +145,7 @@ class TestLinkedList(unittest.TestCase):
     expected = f"{val} {val3} {val4} {val2} "
     expected_reverse = f"{val2} {val4} {val3} {val} "
 
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertTail(val2)
     list.insertAtIndex(val3, 0)
@@ -164,7 +164,7 @@ class TestLinkedList(unittest.TestCase):
     expected = f"{val} {val3} {val2} "
     expected_reverse = f"{val2} {val3} {val} "
 
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertTail(val2)
     list.insertAtIndex(val3, 0)
@@ -182,7 +182,7 @@ class TestLinkedList(unittest.TestCase):
     expected = f"{val} {val3} {val2} "
     expected_reverse = f"{val2} {val3} {val} "
 
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertTail(val2)
     list.insertAtIndex(val3, 0)
@@ -202,7 +202,7 @@ class TestLinkedList(unittest.TestCase):
     expected = f"{val} {val2} {val5} {val3} {val4} "
     expected_reverse = f"{val4} {val3} {val5} {val2} {val} "
 
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertTail(val2)
     list.insertTail(val3)
@@ -223,7 +223,7 @@ class TestLinkedList(unittest.TestCase):
     expected = f"{val2} {val5} {val3} {val4} "
     expected_reverse = f"{val4} {val3} {val5} {val2} "
     expected_item = val
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertTail(val2)
     list.insertTail(val3)
@@ -246,7 +246,7 @@ class TestLinkedList(unittest.TestCase):
       expected_reverse = f"{val4} {val3} {val5} "
       expected_item = val
       expected_secondItem = val2
-      list = linkedList()
+      list = LinkedList()
       list.insertHead(val)
       list.insertTail(val2)
       list.insertTail(val3)
@@ -267,7 +267,7 @@ class TestLinkedList(unittest.TestCase):
       expected_reverse = ""
       expected_item = val
 
-      list = linkedList()
+      list = LinkedList()
       list.insertHead(val)
       item = list.removeAtHead()
 
@@ -284,7 +284,7 @@ class TestLinkedList(unittest.TestCase):
       expected = ""
       expected_reverse = ""
 
-      list = linkedList()
+      list = LinkedList()
       list.insertHead(val)
       list.insertTail(val2)
       list.insertTail(val3)
@@ -307,7 +307,7 @@ class TestLinkedList(unittest.TestCase):
     expected = f"{val} {val2} {val5} {val3} "
     expected_reverse = f"{val3} {val5} {val2} {val} "
     expected_item = val4
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertTail(val2)
     list.insertTail(val3)
@@ -330,7 +330,7 @@ class TestLinkedList(unittest.TestCase):
     expected_reverse = f"{val5} {val2} {val} "
     expected_item = val4
     expected_secondItem = val3
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertTail(val2)
     list.insertTail(val3)
@@ -350,7 +350,7 @@ class TestLinkedList(unittest.TestCase):
     expected_reverse = ""
     expected_item = val
 
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     item = list.removeAtTail()
 
@@ -367,7 +367,7 @@ class TestLinkedList(unittest.TestCase):
     expected = ""
     expected_reverse = ""
 
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertTail(val2)
     list.insertTail(val3)
@@ -388,7 +388,7 @@ class TestLinkedList(unittest.TestCase):
     expected = f"{val} {val3} "
     expected_reverse = f"{val3} {val} "
     expected_item = val2
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertTail(val2)
     list.insertTail(val3)
@@ -407,7 +407,7 @@ class TestLinkedList(unittest.TestCase):
     expected = f"{val2} {val3} "
     expected_reverse = f"{val3} {val2} "
     expected_item = val
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertTail(val2)
     list.insertTail(val3)
@@ -426,7 +426,7 @@ class TestLinkedList(unittest.TestCase):
     expected = f"{val} {val2} "
     expected_reverse = f"{val2} {val} "
     expected_item = val3
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertTail(val2)
     list.insertTail(val3)
@@ -444,7 +444,7 @@ class TestLinkedList(unittest.TestCase):
     expected_reverse = ""
     expected_item = val
 
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
 
     removed_item = list.removeAtIndex(0)
@@ -462,7 +462,7 @@ class TestLinkedList(unittest.TestCase):
     expected_reverse = f"{val2} "
     expected_item = val
 
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertTail(val2)
 
@@ -481,7 +481,7 @@ class TestLinkedList(unittest.TestCase):
     expected_reverse = f"{val} "
     expected_item = val2
 
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertTail(val2)
 
@@ -502,7 +502,7 @@ class TestLinkedList(unittest.TestCase):
     expected_reverse = f"{val4} {val3} {val} "
     expected_item = val2
 
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertTail(val2)
     list.insertTail(val3)
@@ -525,7 +525,7 @@ class TestLinkedList(unittest.TestCase):
     expected_reverse = f"{val4} {val2} {val} "
     expected_item = val3
 
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertTail(val2)
     list.insertTail(val3)
@@ -547,7 +547,7 @@ class TestLinkedList(unittest.TestCase):
     expected = f"{val} {val4} "
     expected_reverse = f"{val4} {val} "
 
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertTail(val2)
     list.insertTail(val3)
@@ -572,7 +572,7 @@ class TestLinkedList(unittest.TestCase):
     expected_reverse = f"{val3} {val2} {val} "
     expected_item = val4
 
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertTail(val2)
     list.insertTail(val4)
@@ -588,7 +588,7 @@ class TestLinkedList(unittest.TestCase):
     expected = ""
     expected_reverse = ""
 
-    list = linkedList()
+    list = LinkedList()
 
     result = list.removeAtIndex(0)
 
@@ -604,7 +604,7 @@ class TestLinkedList(unittest.TestCase):
     expected = f"{val} {val2} "
     expected_reverse = f"{val2} {val} "
 
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertTail(val2)
 
@@ -622,7 +622,7 @@ class TestLinkedList(unittest.TestCase):
     expected = f"{val} {val2} "
     expected_reverse = f"{val2} {val} "
 
-    list = linkedList()
+    list = LinkedList()
     list.insertHead(val)
     list.insertTail(val2)
 
