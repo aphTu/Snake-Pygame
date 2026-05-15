@@ -12,7 +12,9 @@ class Queue():
     return self.queue.removeAtHead()
   
   def peek(self):
-    return self.queue.headNode.val
+    if self.queue.headNode is not None:
+      return self.queue.headNode.val
+    return None
   
   def isEmpty(self):
     return self.queue.isEmpty()
