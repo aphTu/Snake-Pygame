@@ -13,46 +13,41 @@ print(SCREEN_LENGTH, SCREEN_WIDTH)
 
 snake_size = (SCREEN_LENGTH/10, SCREEN_WIDTH/7)
 print(f"Snake size aka divded space {snake_size[0], snake_size[1]}")
-snake = Snake((0,255,255),pygame.Rect((0, 0, snake_size[0], snake_size[1])))
-
-board = Board(7, 10)
+snake = Snake((0,255,255),snake_size)
+board = Board(7, 10, SCREEN_WIDTH, SCREEN_LENGTH)
 clock = pygame.time.Clock()
 run = True
 allow_input = True
 input_queue = Queue()
 time_elapsed = 0
+
 while run:
   dt = clock.tick(60)/1000
   screen.fill((0,0,0))
-  board.initBoard(SCREEN_WIDTH, SCREEN_LENGTH, screen)
-  pygame.draw.rect(screen, snake.color, snake.appearance)
+  board.initBoard(screen)
+  snake.drawSnake(screen)
   key = pygame.key.get_pressed()
-  # if key.__contains__(True):
-  #   print(key)
-  #   snake.updateDirection(key)
+
   for event in pygame.event.get():
     if(event.type == pygame.QUIT):
       run = False
     elif event.type == pygame.KEYDOWN:
-      # if allow_input:
-      #   print(event_key)
       snake.updateDirection(event.key)
   if key[pygame.K_ESCAPE]:
     run = False
- 
+  if not board.insidePlayableArea(snake.getPositionHead()):
+    snake.outOfBound(board.getBoundary())
   if snake.timeDelay - time_elapsed <= 0:
     time_elapsed = 0
     match(snake.direction):
       case 'l':
-        snake.appearance.move_ip(-snake_size[0], 0)
+        snake.updatePositionHead((-snake_size[0], 0))
       case 'r':
-        snake.appearance.move_ip(snake_size[0],0)
+        snake.updatePositionHead((snake_size[0], 0))
       case 'u':
-        
-        snake.appearance.move_ip(0, -snake_size[1] )
+        snake.updatePositionHead((0, -snake_size[1]))
       case 'd':
-        
-        snake.appearance.move_ip(0, snake_size[1])
+        snake.updatePositionHead((0, snake_size[1]))
       case _:
         pass
   time_elapsed+=dt
