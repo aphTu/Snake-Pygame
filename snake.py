@@ -1,10 +1,10 @@
 import pygame
+from apple import Apple
 class Snake:
   def __init__(self, color, snake_size):
     self.color = color
     self.snake_size = snake_size
     self.position = [(snake_size[0] * 1, snake_size[1] * 3),(snake_size[0] * 2, snake_size[1] * 3),(snake_size[0] * 3, snake_size[1] * 3)]
-    # self.appearance = appearance
     self.length = 3
     self.direction = None
     self.timeDelay = 167/1000
@@ -23,6 +23,9 @@ class Snake:
       pass
       #direction should stay same if it not perpendicular
   def updateLength(self):
+    if self.direction == 'u':
+      tail = self.getPosition()[0] 
+      self.position.insert(0, )
     self.length+=1
     
   def getPosition(self):
@@ -63,15 +66,22 @@ class Snake:
     for coord in self.position:
       x, y = coord[0], coord[1]
       rect = pygame.Rect( x, y, self.snake_size[0], self.snake_size[1])
+      print(f"width : {rect.width}")
+      print(f"height: {rect.height}")
       pygame.draw.rect(screen, self.color, rect)
 
-  def updatePositionHead(self, Coord):
+  def updatePositionHead(self, Coord, outOfBound):
     if not isinstance(Coord, tuple):
       raise Exception("Please input a tuple")
     # print(self.getPositionHead())
-    current_head_x = self.position[self.length-1][0] + Coord[0]
-    current_head_y = self.position[self.length-1][1] + Coord[1]
-    # print()
+    current_head_x = None
+    current_head_y = None
+    if not outOfBound:
+      current_head_x = self.position[self.length-1][0] + Coord[0]
+      current_head_y = self.position[self.length-1][1] + Coord[1]
+    else:
+      current_head_x = Coord[0]
+      current_head_y = Coord[1]
     self.position.append((current_head_x, current_head_y))
     self.position.pop(0)
 
@@ -85,11 +95,35 @@ class Snake:
     rightMost = boundaryList[1][0]
     botMost = boundaryList[1][1]
     if head[0] < leftMost:
-      self.updatePositionHead((rightMost,0))
+      self.updatePositionHead((rightMost,head[1]), True)
     elif head[0] > rightMost:
       print(self.getPositionHead())
-      self.updatePositionHead((-rightMost, 0))
+      self.updatePositionHead((leftMost, head[1]), True)
     elif head[1] < topMost:
-      self.updatePositionHead((0, topMost))
+      self.updatePositionHead((head[0], botMost), True)
     else:
-      self.updatePositionHead((0, -topMost))
+      self.updatePositionHead((head[0], topMost), True)
+  
+  def hitBody(self):
+    copy = self.position[:-1]
+    if self.getPositionHead() in copy:
+      return True
+    return False
+  
+  def hitApple(self, apple):
+    if not isinstance(apple, Apple):
+      raise Exception("Argument has to be an Apple object")
+    
+    app_pos = (apple.position_x, apple.position_y)
+
+    # print(app_pos)
+    # print(self.getPositionHead())
+    left = self.getPositionHead()[0]
+    top = self.getPositionHead()[1]
+    right = left + self.snake_size[0]
+    bottom = top + self.snake_size[1]
+    # print(f"left: {left}, right: {right}, top: {top}, bottom: {bottom}")
+    if app_pos[0] > left and app_pos[0] < right and app_pos[1] > top and app_pos[1] < bottom :
+      self.updateLength()
+      apple.updateEaten()
+    

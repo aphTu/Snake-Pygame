@@ -3,7 +3,7 @@ from pygame._sdl2.video import Window
 from snake import Snake
 from board import Board
 from queue import Queue
-import time
+from apple import Apple
 pygame.init()
 screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 # window = Window.from_display_module()
@@ -20,14 +20,15 @@ run = True
 allow_input = True
 input_queue = Queue()
 time_elapsed = 0
-
+apple = Apple(0 + snake_size[0]/2,0+ snake_size[1]/2)
 while run:
   dt = clock.tick(60)/1000
   screen.fill((0,0,0))
   board.initBoard(screen)
+  apple.drawApple(screen)
   snake.drawSnake(screen)
+  
   key = pygame.key.get_pressed()
-
   for event in pygame.event.get():
     if(event.type == pygame.QUIT):
       run = False
@@ -35,19 +36,21 @@ while run:
       snake.updateDirection(event.key)
   if key[pygame.K_ESCAPE]:
     run = False
+  if(snake.hitBody()): run = False
+  snake.hitApple(apple)
   if not board.insidePlayableArea(snake.getPositionHead()):
     snake.outOfBound(board.getBoundary())
   if snake.timeDelay - time_elapsed <= 0:
     time_elapsed = 0
     match(snake.direction):
       case 'l':
-        snake.updatePositionHead((-snake_size[0], 0))
+        snake.updatePositionHead((-snake_size[0], 0), False)
       case 'r':
-        snake.updatePositionHead((snake_size[0], 0))
+        snake.updatePositionHead((snake_size[0], 0), False)
       case 'u':
-        snake.updatePositionHead((0, -snake_size[1]))
+        snake.updatePositionHead((0, -snake_size[1]), False)
       case 'd':
-        snake.updatePositionHead((0, snake_size[1]))
+        snake.updatePositionHead((0, snake_size[1]), False)
       case _:
         pass
   time_elapsed+=dt
