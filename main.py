@@ -20,7 +20,7 @@ run = True
 allow_input = True
 input_queue = Queue()
 time_elapsed = 0
-apple = Apple(0 + snake_size[0]/2,0+ snake_size[1]/2)
+apple = Apple(0 + snake_size[0]/2,0+ snake_size[1]/2, (snake_size[0]/2, snake_size[1]/2))
 while run:
   dt = clock.tick(60)/1000
   screen.fill((0,0,0))
@@ -36,8 +36,11 @@ while run:
       snake.updateDirection(event.key)
   if key[pygame.K_ESCAPE]:
     run = False
-  if(snake.hitBody()): run = False
-  snake.hitApple(apple)
+
+  if(snake.hitBody()): 
+    run = False
+    print("snake hit itself, lose game")
+
   if not board.insidePlayableArea(snake.getPositionHead()):
     snake.outOfBound(board.getBoundary())
   if snake.timeDelay - time_elapsed <= 0:
@@ -53,6 +56,10 @@ while run:
         snake.updatePositionHead((0, snake_size[1]), False)
       case _:
         pass
+  snake.hitApple(apple)
+  if apple.eaten:
+    apple.newPosition(10,7, snake.getPosition(), snake_size)
+    apple.updateEaten()
   time_elapsed+=dt
   pygame.display.update()
 pygame.quit()

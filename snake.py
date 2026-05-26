@@ -23,9 +23,16 @@ class Snake:
       pass
       #direction should stay same if it not perpendicular
   def updateLength(self):
+    tail = self.getPosition()[0] 
     if self.direction == 'u':
-      tail = self.getPosition()[0] 
-      self.position.insert(0, )
+      self.position.insert(0,(tail[0], tail[1] + self.snake_size[1]))
+    if self.direction =='d':
+      self.position.insert(0, (tail[0], tail[1] - self.snake_size[1]))
+    
+    if self.direction=='r':
+      self.position.insert(0, (tail[0] + self.snake_size[0], tail[1]))
+    if self.direction == 'l':
+      self.position.insert(0, (tail[0] - self.snake_size[0], tail[1]))
     self.length+=1
     
   def getPosition(self):
@@ -66,8 +73,8 @@ class Snake:
     for coord in self.position:
       x, y = coord[0], coord[1]
       rect = pygame.Rect( x, y, self.snake_size[0], self.snake_size[1])
-      print(f"width : {rect.width}")
-      print(f"height: {rect.height}")
+      # print(f"width : {rect.width}")
+      # print(f"height: {rect.height}")
       pygame.draw.rect(screen, self.color, rect)
 
   def updatePositionHead(self, Coord, outOfBound):
@@ -113,7 +120,8 @@ class Snake:
   def hitApple(self, apple):
     if not isinstance(apple, Apple):
       raise Exception("Argument has to be an Apple object")
-    
+    if apple.eaten:
+      return
     app_pos = (apple.position_x, apple.position_y)
 
     # print(app_pos)
