@@ -23,16 +23,19 @@ class Snake:
       pass
       #direction should stay same if it not perpendicular
   def updateLength(self):
-    tail = self.getPosition()[0] 
-    if self.direction == 'u':
-      self.position.insert(0,(tail[0], tail[1] + self.snake_size[1]))
-    if self.direction =='d':
-      self.position.insert(0, (tail[0], tail[1] - self.snake_size[1]))
-    
-    if self.direction=='r':
+    tail = self.getPosition()[self.length-1]
+    bottom_two = self.getPosition()[-2:]
+    change_x = bottom_two[0][0] - bottom_two[1][0]
+    change_y = bottom_two[0][1] - bottom_two[1][1] 
+    if change_x < 0:
       self.position.insert(0, (tail[0] + self.snake_size[0], tail[1]))
-    if self.direction == 'l':
+    elif change_x > 0:
       self.position.insert(0, (tail[0] - self.snake_size[0], tail[1]))
+    elif change_y > 0:
+      self.position.insert(0, (tail[0], tail[1] - self.snake_size[1]))
+    else:
+      self.position.insert(0,(tail[0], tail[1] + self.snake_size[1]))
+
     self.length+=1
     
   def getPosition(self):

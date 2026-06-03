@@ -10,11 +10,12 @@ screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 # window.maximize()
 SCREEN_LENGTH, SCREEN_WIDTH = pygame.display.get_window_size()
 print(SCREEN_LENGTH, SCREEN_WIDTH)
-
-snake_size = (SCREEN_LENGTH/10, SCREEN_WIDTH/7)
+block_length = 12
+block_width = 9
+snake_size = (SCREEN_LENGTH/block_length, SCREEN_WIDTH/block_width)
 print(f"Snake size aka divded space {snake_size[0], snake_size[1]}")
 snake = Snake((0,255,255),snake_size)
-board = Board(7, 10, SCREEN_WIDTH, SCREEN_LENGTH)
+board = Board(block_width, block_length, SCREEN_WIDTH, SCREEN_LENGTH)
 clock = pygame.time.Clock()
 run = True
 allow_input = True
@@ -58,7 +59,7 @@ while run:
         pass
   snake.hitApple(apple)
   if apple.eaten:
-    apple.newPosition(10,7, snake.getPosition(), snake_size, board.getBoundary())
+    apple.newPosition(block_length,block_width, snake.getPosition(), snake_size, board.getBoundary())
     apple.updateEaten()
   time_elapsed+=dt
   pygame.display.update()

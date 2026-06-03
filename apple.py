@@ -77,7 +77,7 @@ class Apple():
     invalid_position.update(dr)
     if chosenPosition in invalid_position:
       return False
-    print(invalid_position)
+    # print(invalid_position)
     return True
 
     
