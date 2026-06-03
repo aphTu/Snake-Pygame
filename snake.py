@@ -22,6 +22,7 @@ class Snake:
     else:
       pass
       #direction should stay same if it not perpendicular
+  
   def updateLength(self):
     tail = self.getPosition()[self.length-1]
     bottom_two = self.getPosition()[-2:]
@@ -73,6 +74,14 @@ class Snake:
         return 'r'
       
   def drawSnake(self, screen):
+    head = self.getPositionHead()
+    rect_head = None
+    if self.direction == 'l':
+      rect_head = pygame.Rect(head[0] - self.snake_size[0]/7, head[1] + self.snake_size[1]/4, self.snake_size[0]/3, self.snake_size[1]/2)
+    elif self.direction == 'r' or rect_head is None:
+      rect_head = pygame.Rect(head[0] + self.snake_size[0]/2 + self.snake_size[0]/4, head[1] + self.snake_size[1]/4, self.snake_size[0]/3, self.snake_size[1]/2)
+    pygame.draw.rect(screen, (255,0,0), rect_head)
+
     for coord in self.position:
       x, y = coord[0], coord[1]
       rect = pygame.Rect( x, y, self.snake_size[0], self.snake_size[1])
