@@ -32,21 +32,23 @@ class Apple():
      self.eaten = True
 
   # this generate the new position
-  def newPosition(self, board_length, board_width, snake_position, snake_size):
+  def newPosition(self, board_length, board_width, snake_position, snake_size, boundary_list):
     if not self.eaten:
       return
     chosenPosition = (random.randint(0,board_length)*snake_size[0] + self.scale[0], random.randint(0, board_width) *snake_size[1] +self.scale[1])
-    while not self.isValidPosition(snake_position, chosenPosition, snake_size):
+    while not self.isValidPosition(snake_position, chosenPosition, snake_size, boundary_list):
       chosenPosition = (random.randint(0,board_length)*snake_size[0] + self.scale[0], random.randint(0, board_width) *snake_size[1] +self.scale[1])
     self.updatePositionX(chosenPosition[0])
     self.updatePositionY(chosenPosition[1])
 
     
   # this check if the new position is an invalid position
-  def isValidPosition(self, snake_position, chosenPosition, snake_size):
+  def isValidPosition(self, snake_position, chosenPosition, snake_size, boundary_list):
+    if chosenPosition[0] < 0 or chosenPosition[0] > boundary_list[1][0] or chosenPosition[1] < 0 or chosenPosition[1] > boundary_list[1][1]:
+      return False
     invalid_position = set(snake_position.copy())
     invalid_position.add((self.position_x, self.position_y))
-
+    
     head = snake_position[len(snake_position) - 1]
     up, down, right, left = set(), set(), set(), set()
     for i in range(1,4):
@@ -75,6 +77,7 @@ class Apple():
     invalid_position.update(dr)
     if chosenPosition in invalid_position:
       return False
+    print(invalid_position)
     return True
 
     
