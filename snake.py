@@ -77,10 +77,16 @@ class Snake:
     head = self.getPositionHead()
     rect_head = None
     if self.direction == 'l':
-      rect_head = pygame.Rect(head[0] - self.snake_size[0]/7, head[1] + self.snake_size[1]/4, self.snake_size[0]/3, self.snake_size[1]/2)
+      rect_head = pygame.Rect(head[0] - self.snake_size[0]/8, head[1] + self.snake_size[1]/4, self.snake_size[0]/3, self.snake_size[1]/2)
+    elif self.direction == 'u':
+      rect_head = pygame.Rect(head[0] + self.snake_size[0]/3 ,head[1] - self.snake_size[0]/7 , self.snake_size[0]/3, self.snake_size[1]/2)
+    elif self.direction == 'd':
+      rect_head = pygame.Rect(head[0] + self.snake_size[0]/3 ,head[1] + self.snake_size[0]/7 + self.snake_size[1]/2, self.snake_size[0]/3, self.snake_size[1]/2)
     elif self.direction == 'r' or rect_head is None:
       rect_head = pygame.Rect(head[0] + self.snake_size[0]/2 + self.snake_size[0]/4, head[1] + self.snake_size[1]/4, self.snake_size[0]/3, self.snake_size[1]/2)
+    
     pygame.draw.rect(screen, (255,0,0), rect_head)
+  
 
     for coord in self.position:
       x, y = coord[0], coord[1]
