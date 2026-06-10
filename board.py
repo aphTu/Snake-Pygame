@@ -49,5 +49,10 @@ class Board():
   
   def getBoundary(self):
     return [(0,0), (self.screenLength/self.length * (self.length -1),  self.screenWidth/self.width * (self.width - 1))]
+  
+  def displayGameOver(self, screen):
+    screen.fill((0,0,0))
+    image = pygame.image.load("./image/gameover.jpg")
+    screen.blit(image, (0, 0))
 # board = Board(9,7)
 # board.printBoard()

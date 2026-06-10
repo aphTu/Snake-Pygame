@@ -39,8 +39,9 @@ while run:
     run = False
 
   if(snake.hitBody()): 
-    run = False
     print("snake hit itself, lose game")
+    board.displayGameOver(screen)
+    
 
   if not board.insidePlayableArea(snake.getPositionHead()):
     snake.outOfBound(board.getBoundary())
