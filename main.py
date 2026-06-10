@@ -61,6 +61,7 @@ while run:
   if apple.eaten:
     apple.newPosition(block_length,block_width, snake.getPosition(), snake_size, board.getBoundary())
     apple.updateEaten()
+    
   time_elapsed+=dt
   pygame.display.update()
 pygame.quit()
